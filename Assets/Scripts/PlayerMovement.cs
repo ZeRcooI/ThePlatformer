@@ -3,40 +3,46 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Speed Control")]
     [SerializeField] private float _runSpeed = 10f;
     [SerializeField] private float _jumpSpeed = 5f;
     [SerializeField] private float _climbSpeed = 5f;
     private float _gravityScaleAtStart;
 
     private Vector2 _moveInput;
+
     private Rigidbody2D _rigidbody2D;
     private Animator _animator;
-    private CapsuleCollider2D _bodyCollider2D;
+    //private CapsuleCollider2D _bodyCollider2D;
     private BoxCollider2D _feetCollider2D;
+
+    private bool _isAlive = true;
 
     public void OnMove(InputValue inputValue)
     {
+        if (_isAlive == false)
+            return;
+
         _moveInput = inputValue.Get<Vector2>();
     }
 
     public void OnJump(InputValue inputValue)
     {
-        if (!_feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
-        {
+        if (_isAlive == false)
             return;
-        }
+
+        if (!_feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
+            return;
 
         if (inputValue.isPressed)
-        {
             _rigidbody2D.velocity += new Vector2(0f, _jumpSpeed);
-        }
     }
 
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _bodyCollider2D = GetComponent<CapsuleCollider2D>();
+        //_bodyCollider2D = GetComponent<CapsuleCollider2D>();
         _feetCollider2D = GetComponent<BoxCollider2D>();
 
         _gravityScaleAtStart = _rigidbody2D.gravityScale;
@@ -44,9 +50,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if(_isAlive == false)
+            return;
+
         Run();
         FlipSprite();
         ClimbLadder();
+        Die();
+    }
+
+    private void Die()
+    {
+        if (_rigidbody2D.IsTouchingLayers(LayerMask.GetMask("Enemies")))
+            _isAlive = false;
     }
 
     private void ClimbLadder()
@@ -73,9 +89,7 @@ public class PlayerMovement : MonoBehaviour
         bool playerHasHorizontalSpeed = Mathf.Abs(_rigidbody2D.velocity.x) > Mathf.Epsilon;
 
         if (playerHasHorizontalSpeed)
-        {
             transform.localScale = new Vector2(Mathf.Sign(_rigidbody2D.velocity.x), 1f);
-        }
     }
 
     private void Run()
