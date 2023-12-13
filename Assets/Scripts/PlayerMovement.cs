@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
         if (!_capsuleCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             return;
-        } //todo узнать за логику
+        }
 
         if (inputValue.isPressed)
         {
@@ -56,11 +52,18 @@ public class PlayerMovement : MonoBehaviour
         if (!_capsuleCollider2D.IsTouchingLayers(LayerMask.GetMask("Climbing")))
         {
             _rigidbody2D.gravityScale = _gravityScaleAtStart;
+            _animator.SetBool("IsClimbing", false);
+
             return;
-        } //todo узнать за логику
+        }
 
         Vector2 climbVelocity = new Vector2(_rigidbody2D.velocity.x, _moveInput.y * _climbSpeed);
         _rigidbody2D.velocity = climbVelocity;
+        _rigidbody2D.gravityScale = 0f;
+
+        bool playerHasVerticalSpeed = Mathf.Abs(_rigidbody2D.velocity.y) > Mathf.Epsilon;
+
+        _animator.SetBool("IsClimbing", playerHasVerticalSpeed);
     }
 
     private void FlipSprite()
