@@ -18,6 +18,14 @@ public class PlayerMovement : MonoBehaviour
 
     private float _gravityScaleAtStart;
 
+    private string _layerGround = "Ground";
+    private string _layerHazard = "Hazards";
+    private string _layerEnemies = "Enemies";
+    private string _layerClimbing = "Climbing";
+    private string _animationRunning = "IsRunning";
+    private string _animationDying = "Dying";
+    private string _animationClimbing = "IsClimbing";
+
     private Vector2 _moveInput;
 
     private Rigidbody2D _rigidbody2D;
@@ -26,34 +34,6 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D _feetCollider2D;
 
     private bool _isAlive = true;
-
-    public void OnFire(InputValue inputValue)
-    {
-        if (_isAlive == false)
-            return;
-
-        Instantiate(_bullet, _gun.position,transform.rotation);
-    }
-
-    public void OnMove(InputValue inputValue)
-    {
-        if (_isAlive == false)
-            return;
-
-        _moveInput = inputValue.Get<Vector2>();
-    }
-
-    public void OnJump(InputValue inputValue)
-    {
-        if (_isAlive == false)
-            return;
-
-        if (!_feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
-            return;
-
-        if (inputValue.isPressed)
-            _rigidbody2D.velocity += new Vector2(0f, _jumpSpeed);
-    }
 
     private void Start()
     {
@@ -76,13 +56,41 @@ public class PlayerMovement : MonoBehaviour
         Die();
     }
 
+    public void OnFire(InputValue inputValue)
+    {
+        if (_isAlive == false)
+            return;
+
+        Instantiate(_bullet, _gun.position,transform.rotation);
+    }
+
+    public void OnMove(InputValue inputValue)
+    {
+        if (_isAlive == false)
+            return;
+
+        _moveInput = inputValue.Get<Vector2>();
+    }
+
+    public void OnJump(InputValue inputValue)
+    {
+        if (_isAlive == false)
+            return;
+
+        if (!_feetCollider2D.IsTouchingLayers(LayerMask.GetMask(_layerGround)))
+            return;
+
+        if (inputValue.isPressed)
+            _rigidbody2D.velocity += new Vector2(0f, _jumpSpeed);
+    }
+
     private void Die()
     {
-        if (_rigidbody2D.IsTouchingLayers(LayerMask.GetMask("Enemies", "Hazards")))
+        if (_rigidbody2D.IsTouchingLayers(LayerMask.GetMask(_layerEnemies, _layerHazard)))
         {
             _isAlive = false;
 
-            _animator.SetTrigger("Dying");
+            _animator.SetTrigger(_animationDying);
 
             _rigidbody2D.velocity = _deathKick;
         }
@@ -90,10 +98,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void ClimbLadder()
     {
-        if (!_feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Climbing")))
+        if (!_feetCollider2D.IsTouchingLayers(LayerMask.GetMask(_layerClimbing)))
         {
             _rigidbody2D.gravityScale = _gravityScaleAtStart;
-            _animator.SetBool("IsClimbing", false);
+            _animator.SetBool(_animationClimbing, false);
 
             return;
         }
@@ -104,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
 
         bool playerHasVerticalSpeed = Mathf.Abs(_rigidbody2D.velocity.y) > Mathf.Epsilon;
 
-        _animator.SetBool("IsClimbing", playerHasVerticalSpeed);
+        _animator.SetBool(_animationClimbing, playerHasVerticalSpeed);
     }
 
     private void FlipSprite()
@@ -121,6 +129,6 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody2D.velocity = playerVelocity;
 
         bool playerHasHorizontalSpeed = Mathf.Abs(_rigidbody2D.velocity.x) > Mathf.Epsilon;
-        _animator.SetBool("IsRunning", playerHasHorizontalSpeed);
+        _animator.SetBool(_animationRunning, playerHasHorizontalSpeed);
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 1f;
+
     private Rigidbody2D _rigidbody2D;
 
     private void Start()
@@ -23,6 +24,6 @@ public class EnemyMovement : MonoBehaviour
 
     private void FlipEnemyFacing()
     {
-        transform.localScale = new Vector2(-(Mathf.Sign(_rigidbody2D.velocity.x)), 1f);
+        transform.localScale = new Vector2(-Mathf.Sign(_rigidbody2D.velocity.x), 1f);
     }
 }
