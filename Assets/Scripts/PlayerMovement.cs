@@ -7,6 +7,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _runSpeed = 10f;
     [SerializeField] private float _jumpSpeed = 5f;
     [SerializeField] private float _climbSpeed = 5f;
+
+    [SerializeField] private Vector2 _deathKick = new Vector2(10f, 10f);
+
     private float _gravityScaleAtStart;
 
     private Vector2 _moveInput;
@@ -50,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(_isAlive == false)
+        if (_isAlive == false)
             return;
 
         Run();
@@ -61,8 +64,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Die()
     {
-        if (_rigidbody2D.IsTouchingLayers(LayerMask.GetMask("Enemies")))
+        if (_rigidbody2D.IsTouchingLayers(LayerMask.GetMask("Enemies", "Hazards")))
+        {
             _isAlive = false;
+
+            _animator.SetTrigger("Dying");
+
+            _rigidbody2D.velocity = _deathKick;
+        }
     }
 
     private void ClimbLadder()
