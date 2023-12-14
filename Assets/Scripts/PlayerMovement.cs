@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _climbSpeed = 5f;
 
     [SerializeField] private Vector2 _deathKick = new Vector2(10f, 10f);
+    [SerializeField] private GameObject _bullet;
+    [SerializeField] private Transform _gun;
 
     private float _gravityScaleAtStart;
 
@@ -20,6 +22,14 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D _feetCollider2D;
 
     private bool _isAlive = true;
+
+    public void OnFire(InputValue inputValue)
+    {
+        if (_isAlive == false)
+            return;
+
+        Instantiate(_bullet, _gun.position,transform.rotation);
+    }
 
     public void OnMove(InputValue inputValue)
     {
