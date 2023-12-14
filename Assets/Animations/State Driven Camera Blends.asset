@@ -36,17 +36,17 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: '**ANY CAMERA**'
-    m_To: Laddder Camera
+    m_To: Ladder Camera
     m_Blend:
       m_Style: 1
-      m_Time: 0.2
+      m_Time: 0.3
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Laddder Camera
+  - m_From: Ladder Camera
     m_To: '**ANY CAMERA**'
     m_Blend:
       m_Style: 1

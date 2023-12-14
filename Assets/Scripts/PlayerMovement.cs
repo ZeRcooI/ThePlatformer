@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent (typeof(Animator))]
+[RequireComponent (typeof(BoxCollider2D))]
+
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Speed Control")]
