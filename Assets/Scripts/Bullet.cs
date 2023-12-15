@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _playerMovement = FindObjectOfType<PlayerMovement>();
 
-        _xSpeed = _playerMovement.transform.localScale.x * _bullsetSpeed;    
+        _xSpeed = _playerMovement.transform.localScale.x * _bullsetSpeed;
     }
 
     private void Update()

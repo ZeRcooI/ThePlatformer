@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent (typeof(Animator))]
-[RequireComponent (typeof(BoxCollider2D))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(BoxCollider2D))]
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         if (_isAlive == false)
             return;
 
-        Instantiate(_bullet, _gun.position,transform.rotation);
+        Instantiate(_bullet, _gun.position, transform.rotation);
     }
 
     public void OnMove(InputValue inputValue)
