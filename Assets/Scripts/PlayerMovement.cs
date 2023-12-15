@@ -93,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetTrigger(_animationDying);
 
             _rigidbody2D.velocity = _deathKick;
+
+            FindAnyObjectByType<GameSession>().ProcessPlayerDeath();
         }
     }
 
