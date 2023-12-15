@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpSpeed = 5f;
     [SerializeField] private float _climbSpeed = 5f;
 
-    [SerializeField] private Vector2 _deathKick = new Vector2(10f, 10f);
+    [SerializeField] private Vector2 _deathKick = new Vector2(0f, 5f);
     [SerializeField] private GameObject _bullet;
     [SerializeField] private Transform _gun;
 
