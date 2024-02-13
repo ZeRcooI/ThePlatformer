@@ -1,3 +1,17 @@
-* The preview can be viewed here: https://youtu.be/tPMItYtNPdk
+# The Kairos (2d Платформер) 
 
-![image](https://github.com/ZeRcooI/ThePlatformer/assets/94679102/7114e9b8-19e5-4b45-9fb1-e77637396733)
+Сводка новых навыков в разработке 2D платформера в Unity:
+
+- Уровни и тайлы: Овладение созданием уровней с помощью Tilemap и RuleTile, что позволяет создавать разнообразные игровые миры.
+- Механики персонажа: Написание различных механик для спрайтов, обеспечивающих увлекательный и разнообразный геймплей.
+- Singletone: Знание работы Singletone и осознание его ограничений, что позволяет избежать ненужных сложностей и проблем в разработке.
+- Уровни и канвас: Умение создавать уровни и связывать результаты по канвасу между ними, обеспечивая единую игру.
+- Префабы: Применение префабов для удобного и эффективного создания и управления объектами в игровом мире.
+- Анимации спрайтов: Разбор анимаций спрайтов, что добавляет динамику и живость в игровые персонажи и объекты.
+- Cinemachine: Овладение инструментом Cinemachine, который обеспечивает более гибкую и эффективную работу с камерой в игре, улучшая общее визуальное впечатление.
+
+Небольшой отрывок игры: https://youtu.be/tPMItYtNPdk
+
+![Screenshot](https://github.com/ZeRcooI/ThePlatformer/blob/main/Assets/Screenshots/Screenshot%201.jpg)
+![Screenshot](https://github.com/ZeRcooI/ThePlatformer/blob/main/Assets/Screenshots/Screenshot%202.jpg)
+![Screenshot](https://github.com/ZeRcooI/ThePlatformer/blob/main/Assets/Screenshots/Screenshot%203.jpg)
