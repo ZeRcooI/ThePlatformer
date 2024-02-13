@@ -13,5 +13,7 @@
 Небольшой отрывок игры: https://youtu.be/tPMItYtNPdk
 
 ![Screenshot](https://github.com/ZeRcooI/ThePlatformer/blob/main/Assets/Screenshots/Screenshot%201.jpg)
+
 ![Screenshot](https://github.com/ZeRcooI/ThePlatformer/blob/main/Assets/Screenshots/Screenshot%202.jpg)
+
 ![Screenshot](https://github.com/ZeRcooI/ThePlatformer/blob/main/Assets/Screenshots/Screenshot%203.jpg)
